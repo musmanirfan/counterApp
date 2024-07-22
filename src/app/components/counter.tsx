@@ -1,43 +1,64 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react';
 
-type counterTypes = {
+type CounterTypes = {
     message: string;
     count: number;
-}
+};
 
-export default function Counter({ message, count }: counterTypes) {
+export default function Counter({ message, count }: CounterTypes) {
+    const [counts, setCounts] = useState(count);
+    const [userName, setUserName] = useState("");
+    const [value, setValue] = useState(0);
+    const [displayMessage, setDisplayMessage] = useState(message);
 
-    let [counts, setCounts] = useState(count);
-
-    let [userName, setUserName] = useState("");
-    let [value, setValue] = useState(0);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     const addition = () => {
-        setCounts(counts + (+value))
-    }
+        setCounts(counts + value);
+    };
+    
     const subtraction = () => {
         if (counts >= value) {
-            setCounts(counts - (+value))
+            setCounts(counts - value);
         }
-    }
+    };
 
-    let userNameHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUserName(event.target.value);
-    }
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserName(e.target.value);
+    };
+
+    const handleButtonClick = () => {
+        setDisplayMessage(`Hello ${userName}`);
+        setUserName(""); // Clear the input field
+        if (inputRef.current) {
+            inputRef.current.focus(); // Keep focus on the input field
+        }
+    };
 
     return (
         <div className='flex items-center justify-center h-screen bg-gray-100'>
             <div className='bg-white p-6 rounded-lg shadow-md w-80'>
-                <h1 className='text-center text-xl font-semibold text-gray-700'>{`${message} ${userName}`}</h1>
-                <input
-                    type="text"
-                    value={userName}
-                    onChange={userNameHandler}
-                    className='border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-md px-3 py-2 mt-4 w-full'
-                    placeholder='Enter your name'
-                />
+                <h1 className='text-center text-xl font-semibold text-gray-700'>{displayMessage}</h1>
+                <div className='relative mt-4'>
+                    <input
+                        type="text"
+                        value={userName}
+                        onChange={handleInputChange}
+                        ref={inputRef}
+                        className='border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-md px-3 py-2 w-full pr-12'
+                        placeholder='Enter your name'
+                    />
+                    <button 
+                        onClick={handleButtonClick} 
+                        className='absolute right-0 top-0 h-full border-l px-3 py-2 bg-green-500 text-white rounded-r-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-300'
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </button>
+                </div>
                 <input
                     type="number"
                     placeholder='Add Value'
@@ -51,5 +72,5 @@ export default function Counter({ message, count }: counterTypes) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
