@@ -31,10 +31,7 @@ export default function Counter({ message, count }: CounterTypes) {
 
     const handleButtonClick = () => {
         setDisplayMessage(`Hello ${userName}`);
-        setUserName(""); // Clear the input field
-        if (inputRef.current) {
-            inputRef.current.focus(); // Keep focus on the input field
-        }
+        setUserName(""); 
     };
 
     return (
@@ -46,7 +43,6 @@ export default function Counter({ message, count }: CounterTypes) {
                         type="text"
                         value={userName}
                         onChange={handleInputChange}
-                        ref={inputRef}
                         className='border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-md px-3 py-2 w-full pr-12'
                         placeholder='Enter your name'
                     />
