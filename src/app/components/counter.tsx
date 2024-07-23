@@ -44,7 +44,7 @@ export default function Counter({ message, count }: CounterTypes) {
                         value={userName}
                         onChange={handleInputChange}
                         className='border border-gray-300 focus:border-blue-500 focus:ring focus:ring-blue-200 rounded-md px-3 py-2 w-full pr-12'
-                        placeholder='Enter your name'
+                        placeholder='Enter your fatherName'
                     />
                     <button 
                         onClick={handleButtonClick} 
@@ -64,7 +64,7 @@ export default function Counter({ message, count }: CounterTypes) {
                 <p className='text-center text-lg font-medium text-gray-700 mt-4'>{counts}</p>
                 <div className='flex justify-around mt-4'>
                     <button onClick={addition} className='border px-5 py-2 rounded-3xl bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300'>Add</button>
-                    <button onClick={subtraction} className='border px-5 py-2 rounded-3xl bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300'>Subtract</button>
+                    <button onClick={subtraction} className='border px-5 py-2 rounded-3xl bg-red-500 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-300'>tract</button>
                 </div>
             </div>
         </div>
